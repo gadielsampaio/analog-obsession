@@ -1,0 +1,39 @@
+---
+import CategoryHero from '../components/CategoryHero.astro';
+import PluginCard from '../components/PluginCard.astro';
+import { categories, getPluginsByCategory, type Category } from '../data/catalog';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return categories.map((category) => ({
+    params: { category: category.slug },
+    props: { category },
+  }));
+}
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+const categoryPlugins = getPluginsByCategory(category.slug);
+---
+
+<BaseLayout
+  title={category.pageTitle}
+  description={category.description}
+  activePage={category.slug}
+  signal={category.signal}
+  footerLabel={category.footerLabel}
+>
+  <CategoryHero category={category} count={categoryPlugins.length} />
+
+  <main class="catalog-wrapper">
+    <div class="catalog-header">
+      <span>INDEX: {category.catalogLabel}</span>
+      <span>STATUS: ONLINE</span>
+    </div>
+
+    {categoryPlugins.map((plugin) => <PluginCard plugin={plugin} />)}
+  </main>
+</BaseLayout>

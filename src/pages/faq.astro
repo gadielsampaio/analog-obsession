@@ -1,0 +1,60 @@
+---
+import FaqItem from '../components/FaqItem.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="FAQ — ANALOG OBSESSION"
+  description="Analog Obsession FAQ — formats, installation, support and resizable UI notes."
+  activePage="faq"
+  signal="INFO → INSTALL → SUPPORT"
+  footerLabel="DIRECTORY // FAQ 06"
+>
+  <section class="hero faq-hero">
+    <span class="hero-label">DIRECTORY // 06</span>
+    <h1 class="hero-title faq-hero-title">FAQ</h1>
+    <div class="hero-meta">
+      <span>FORMATS / INSTALLATION</span>
+      <span>CREATOR-PUBLISHED NOTES</span>
+      <span>05 ENTRIES</span>
+    </div>
+  </section>
+
+  <main class="faq-index">
+    <div class="catalog-header">
+      <span>INDEX: FREQUENTLY ASKED QUESTIONS</span>
+      <span>SOURCE: ANALOG OBSESSION</span>
+    </div>
+
+    <FaqItem number="01" question="What formats do you support?">
+      <p>VST3 / AU / AAX Native – Audiosuite | 64 Bit | Mac 10.11 – 13.X / Windows 10 – 11. *Mac Versions require a graphics card that supports “Metal”</p>
+      <p>*Windows Versions require a graphics card that supports “OpenGL”</p>
+    </FaqItem>
+
+    <FaqItem number="02" question="Why aren’t all plug-ins on the site?">
+      <p>Just started to update all plug-ins with AAX, Resizable UI & Apple Silicon support. I relaunched my website to show my product catalog and redirect to Patreon posts, easily. So, all updated plug-ins will be added.</p>
+    </FaqItem>
+
+    <FaqItem number="03" question="Should I subscribe to use Analog Obsession plug-ins?">
+      <p>
+        Analog Obsession plug-ins are totally free! You can use them without any cost! But of course, you’re free to support on
+        <a href="https://www.patreon.com/analogobsession" target="_blank" rel="noopener noreferrer">PATREON ↗</a> !
+      </p>
+    </FaqItem>
+
+    <FaqItem number="04" question="How do I install your plug-ins?">
+      <p>There are two installers (Mac & Windows) and a .zip file (Windows). You can simply install with .pkg file on Mac. On Windows, you can simply install with installers or extract .zip file and put plug-in files into their folders.</p>
+    </FaqItem>
+
+    <FaqItem number="05" question="How is your “Resizable UI” working?">
+      <p>When you duplicate plug-in, it will remember current state of GUI size. But if you load new instance, it will be opened at default size. To get rid of this issue, simply follow these steps;</p>
+      <ol class="faq-steps">
+        <li>Open plug-in for the first time</li>
+        <li>Resize GUI according to your screen resolution or you liking before setting any knobs</li>
+        <li>Save this state as default preset with your DAW</li>
+      </ol>
+      <p>Now, you will be able to load new instances with same size.</p>
+      <p>(If you want to go default size, simply double click to resize handle.)</p>
+    </FaqItem>
+  </main>
+</BaseLayout>

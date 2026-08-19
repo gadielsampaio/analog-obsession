@@ -1,0 +1,25 @@
+---
+import type { Category } from '../data/catalog';
+
+interface Props {
+  category: Category;
+  count: number;
+}
+
+const { category, count } = Astro.props;
+const countLabel = `${String(count).padStart(2, '0')} UNITS FOUND`;
+---
+
+<section class="hero">
+  <span class="hero-label">DIRECTORY // {category.number}</span>
+  <h1 class:list={['hero-title', category.titleLines.length > 1 && 'hero-title-long']}>
+    {category.titleLines.map((line, index) => (
+      <>{index > 0 && <br />}{line}</>
+    ))}
+  </h1>
+  <div class="hero-meta">
+    <span>{category.heroMeta[0]}</span>
+    <span>{category.heroMeta[1]}</span>
+    <span>{countLabel}</span>
+  </div>
+</section>

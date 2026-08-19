@@ -1,0 +1,80 @@
+---
+import { categories } from '../data/catalog';
+import { externalLinks, faqDirectoryEntry } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/home.css';
+
+const directoryEntries = [
+  ...categories.map((category) => ({
+    number: category.number,
+    href: `${category.slug}.html`,
+    label: category.homeLabel,
+    note: category.directoryNote,
+  })),
+  faqDirectoryEntry,
+];
+---
+
+<BaseLayout
+  title="ANALOG OBSESSION — PLUGIN DIRECTORY"
+  description="Independent directory for Analog Obsession plugins, organized by category with links to the creator's original releases."
+  activePage="home"
+  footerLabel="PLUGIN DIRECTORY // HOME"
+  bodyClass="home-page"
+>
+  <main>
+    <section class="home-hero home-hero--fullscreen" aria-labelledby="home-title">
+      <img
+        class="home-hero-bg"
+        src="https://analogobsession.com/wp-content/uploads/2023/04/HOME.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <div class="home-hero-overlay" aria-hidden="true"></div>
+
+      <div class="home-hero-content">
+        <span class="home-hero-kicker">INDEPENDENT PLUGIN DIRECTORY</span>
+        <h1 id="home-title" class="home-hero-title">FREE PLUGINS.<br />ONE CLEAN<br />DIRECTORY.</h1>
+        <p class="home-hero-description">
+          Explore the work of Analog Obsession without digging through bookmarks, old posts or scattered releases.
+        </p>
+        <a class="home-hero-button" href="#directory">
+          <span>EXPLORE PLUGINS</span><span aria-hidden="true">↓</span>
+        </a>
+      </div>
+
+      <div class="home-hero-stamp" aria-hidden="true">
+        <img src="assets/images/ao-negative.svg" alt="" />
+      </div>
+    </section>
+
+    <section class="directory-index" id="directory" aria-labelledby="directory-title">
+      <header class="directory-heading">
+        <span>INDEX // 001—006</span>
+        <h2 id="directory-title">DIRECTORY</h2>
+        <span>SELECT SECTION</span>
+      </header>
+
+      {directoryEntries.map((entry) => (
+        <a class="directory-row" href={entry.href}>
+          <span class="directory-number">{entry.number}</span>
+          <div class="directory-name-wrap">
+            <h3 class="directory-name">{entry.label}</h3>
+            <span class="directory-note">{entry.note}</span>
+          </div>
+          <span class="directory-open">OPEN ↗</span>
+        </a>
+      ))}
+    </section>
+
+    <section class="support-line" aria-label="Creator support">
+      <div class="support-line-copy">
+        <span class="support-line-index">CREATOR SUPPORT // 001</span>
+        <p>THE PLUG-INS ARE FREE TO USE. YOUR SUPPORT HELPS KEEP THIS INCREDIBLE WORK GOING.</p>
+      </div>
+      <a href={externalLinks.patreon} target="_blank" rel="noopener noreferrer">
+        <span>SUPPORT ON PATREON</span><span aria-hidden="true">↗</span>
+      </a>
+    </section>
+  </main>
+</BaseLayout>

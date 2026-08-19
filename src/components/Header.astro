@@ -1,0 +1,42 @@
+---
+import { categories, type CategorySlug } from '../data/catalog';
+import type { PageId } from '../data/site';
+
+interface Props {
+  activePage: PageId;
+  signal?: string;
+}
+
+const { activePage, signal = '' } = Astro.props;
+
+const navLinks = [
+  { id: 'home' as const, href: 'index.html#directory', label: 'DIRECTORY' },
+  ...categories.map((category) => ({
+    id: category.slug as CategorySlug,
+    href: `${category.slug}.html`,
+    label: category.homeLabel,
+  })),
+  { id: 'faq' as const, href: 'faq.html', label: 'FAQ' },
+];
+---
+
+<header class="sys-header">
+  <a class="brand-logo" href="index.html" aria-label="Analog Obsession directory home">
+    <img class="brand-mark" src="assets/images/AO-log.svg" alt="" />
+    <span>ANALOG OBSESSION</span>
+  </a>
+
+  <nav class="main-nav" aria-label="Primary navigation">
+    <ul>
+      {navLinks.map((item) => (
+        <li>
+          <a href={item.href} class:list={[activePage === item.id && 'active']}>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <div class="signal-path-label">{signal}</div>
+</header>

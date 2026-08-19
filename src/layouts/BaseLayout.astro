@@ -1,0 +1,50 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import type { PageId } from '../data/site';
+import '../styles/global.css';
+import PageLoader from '../components/PageLoader.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  activePage: PageId;
+  footerLabel: string;
+  signal?: string;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  activePage,
+  footerLabel,
+  signal = '',
+  bodyClass,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#e9e7e1" />
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Oswald:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body id="top" class={bodyClass}>
+    <div class="analog-grain" aria-hidden="true"></div>
+    <Header activePage={activePage} signal={signal} />
+    <PageLoader />
+    <slot />
+    <Footer label={footerLabel} />
+  </body>
+</html>
