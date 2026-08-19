@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import homeHero from '../assets/images/home-hero.png';
+
 import { categories } from '../data/catalog';
 import { externalLinks, faqDirectoryEntry } from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -24,11 +27,17 @@ const directoryEntries = [
 >
   <main>
     <section class="home-hero home-hero--fullscreen" aria-labelledby="home-title">
-      <img
+      <Image
         class="home-hero-bg"
-        src="https://analogobsession.com/wp-content/uploads/2023/04/HOME.png"
+        src={homeHero}
         alt=""
         aria-hidden="true"
+        format="webp"
+        quality={80}
+        widths={[768, 1280, 1920]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
       />
       <div class="home-hero-overlay" aria-hidden="true"></div>
 
