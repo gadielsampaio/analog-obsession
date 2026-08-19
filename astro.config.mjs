@@ -5,6 +5,9 @@ export default defineConfig({
   trailingSlash: 'never',
   site: 'https://gadielsampaio.github.io/',
   base: '/analog-obsession',
+  image: {
+    domains: ['analogobsession.com']
+  },
   build: {
     format: 'file',
     inlineStylesheets: 'never',
