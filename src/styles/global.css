@@ -132,16 +132,16 @@ ul {
     display: flex;
     align-items: center;
     gap: 0.45rem;
-    font-family: var(--font-grotesk);
+    font-family: var(--font-condensed);
     font-weight: 700;
     font-size: 1.2rem;
     letter-spacing: -0.5px;
 }
 
 .brand-mark {
-    width: 42px;
+    width: 50px;
+    max-width: 100%;
     height: auto;
-    flex: 0 0 auto;
 }
 
 .main-nav ul {
@@ -311,6 +311,10 @@ ul {
     font-weight: 700;
     text-transform: uppercase;
     transition: color var(--transition-fast), padding-left var(--transition-fast);
+}
+
+.footer-link .patreon-link {
+    font-size: 1.3rem;
 }
 
 .footer-link:last-child {

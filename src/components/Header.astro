@@ -1,6 +1,8 @@
 ---
 import { categories, type CategorySlug } from '../data/catalog';
 import type { PageId } from '../data/site';
+import { Image } from 'astro:assets';
+import brandMark from '../assets/images/AO-log.svg';
 
 interface Props {
   activePage: PageId;
@@ -22,11 +24,16 @@ const navLinks = [
 
 <header class="sys-header">
   <a class="brand-logo" href="index.html" aria-label="Analog Obsession directory home">
-    <img class="brand-mark" src="assets/images/AO-log.svg" alt="" />
+    <Image src={brandMark} class="brand-mark" alt="Logo Analog Obsession"/>
     <span>ANALOG OBSESSION</span>
   </a>
 
-  <nav class="main-nav" aria-label="Primary navigation">
+  <button class="mobile-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation">
+    <span class="menu-text-open">MENU</span>
+    <span class="menu-text-close">CLOSE</span>
+  </button>
+
+  <nav id="main-nav" class="main-nav" aria-label="Primary navigation">
     <ul>
       {navLinks.map((item) => (
         <li>
@@ -36,7 +43,109 @@ const navLinks = [
         </li>
       ))}
     </ul>
+    
+    <div class="mobile-signal">{signal}</div>
   </nav>
 
-  <div class="signal-path-label">{signal}</div>
+  <div class="signal-path-label desktop-signal">{signal}</div>
 </header>
+
+<script>
+  const toggleBtn = document.querySelector('.mobile-toggle');
+  const nav = document.getElementById('main-nav');
+
+  if (toggleBtn && nav) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+      nav.classList.toggle('is-open');
+      document.body.style.overflow = isExpanded ? '' : 'hidden';
+    });
+
+    const links = nav.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('is-open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+</script>
+
+<style>
+  .mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--tech-red);
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    z-index: 100;
+  }
+
+  .menu-text-close { display: none; }
+  .mobile-signal { display: none; }
+
+  @media (max-width: 900px) {
+    .mobile-toggle { display: block; }
+    .desktop-signal { display: none; }
+
+    .main-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--charcoal);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 90;
+    }
+
+    .main-nav.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .main-nav ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .main-nav li a {
+      font-size: 1.5rem;
+      color: var(--off-white);
+      text-decoration: none;
+      font-family: var(--font-mono, monospace);
+      /* font-weight: 700; */
+      letter-spacing: 0.05em;
+    }
+
+    .mobile-toggle[aria-expanded="true"] .menu-text-open { display: none; }
+    .mobile-toggle[aria-expanded="true"] .menu-text-close { display: block; }
+    
+    .mobile-signal {
+      display: block;
+      position: absolute;
+      bottom: 2rem;
+      font-family: var(--font-mono, monospace);
+      font-size: 0.7rem;
+      color: var(--off-white);
+      opacity: 0.7;
+    }
+  }
+</style>

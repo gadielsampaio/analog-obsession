@@ -4,7 +4,7 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'never',
   site: 'https://gadielsampaio.github.io/',
-  base: '/analog-obsession',
+  base: processAnnotations.env.NODE_ENV === 'production' ? '/analog-obsession/' : '/',
   image: {
     domains: ['analogobsession.com']
   },

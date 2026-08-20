@@ -1,25 +1,59 @@
 <div class="page-loader" id="page-loader">
   <div class="page-loader__inner">
-    <span class="page-loader__brand">ANALOG OBSESSION</span>
+    <!-- <span class="page-loader__brand">ANALOG OBSESSION</span> -->
 
     <div class="page-loader__track">
       <div class="page-loader__bar"></div>
     </div>
 
-    <span class="page-loader__status">LOADING DIRECTORY</span>
+    <span class="page-loader__status" id="loader-status">LOADING DIRECTORY</span>
   </div>
 </div>
 
 <script>
   const loader = document.getElementById('page-loader');
+  const statusText = document.getElementById('loader-status');
 
-  window.setTimeout(() => {
-    loader?.classList.add('is-loaded');
+  const phrases = [
+    "WARMING UP TUBES...",
+    "CALIBRATING VU METERS...",
+    "SETTING THRESHOLD...",
+    "ADJUSTING COMPRESSION RATIO...",
+    "SATURATING TRANSFORMERS..."
+  ];
 
+  let phraseIndex = 0;
+
+  // Troca a frase a cada 300ms
+  const textInterval = setInterval(() => {
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    if (statusText) statusText.innerText = phrases[phraseIndex];
+  }, 1000);
+
+  function hideLoader() {
+    clearInterval(textInterval); // Para a troca de frases
+    
+    // Opcional: Dá um feedback visual final antes de sumir
+    if (statusText) statusText.innerText = "READY."; 
+
+    // Aguarda um instante só para o usuário ler o "READY", depois some
     window.setTimeout(() => {
-      loader?.remove();
+      loader?.classList.add('is-loaded');
+
+      window.setTimeout(() => {
+        loader?.remove();
+      }, 400); // 400ms é o tempo que está no seu CSS (opacity 400ms)
     }, 400);
-  }, 1200);
+  }
+
+  // A MÁGICA ACONTECE AQUI:
+  // O navegador avisa quando todas as imagens e o layout terminaram de carregar
+  window.addEventListener('load', hideLoader);
+
+  // FALLBACK DE SEGURANÇA (Boas práticas):
+  // Se alguma imagem do site der erro e travar o carregamento, 
+  // nós forçamos o loader a sair depois de 8 segundos para o usuário não ficar preso.
+  window.setTimeout(hideLoader, 8000);
 </script>
 
 <style>
@@ -46,6 +80,10 @@
 
   .page-loader__inner {
     width: min(320px, 80vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
   }
 
   .page-loader__brand {
@@ -53,7 +91,7 @@
 
     margin-bottom: 1rem;
 
-    font-family: var(--font-grotesk);
+    font-family: var(--font-condensed);
     font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 0.08em;

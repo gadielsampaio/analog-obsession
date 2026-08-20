@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { externalLinks } from '../data/site';
+import brandMarkW from '../assets/images/AO-log-W.svg'
 
 interface Props {
   label: string;
@@ -14,13 +16,19 @@ const { label } = Astro.props;
       <span class="footer-kicker">ARCHIVE // ANALOG OBSESSION</span>
       <div>
         <div class="footer-wordmark">ANALOG<br />OBSESSION</div>
-        <p class="footer-credit">Plugins by Rıdvan Küçük (Tunca).</p>
+        <!-- <Image src={brandMarkW} alt="Logo Analog Obsession" /> -->
+        <p class="footer-credit">by Rıdvan Küçük (Tunca).</p>
       </div>
     </div>
 
     <div class="footer-about">
-      <span class="footer-label">CREATOR // 001</span>
-      <p>Musician, hardware designer and plugin developer.</p>
+      <span class="footer-label">CREATOR //</span>
+      <p>Musician, hardware designer and plugin developer.
+      <p class="footer-credit">
+        I love bringing the classic sound of analog hardware into your DAW, but I can't do it alone.<br>
+        Your support on Patreon, even just a few dollars a month, gives me the time to keep developing new plugins.<br>
+        Thank you for helping me keep this project alive so we can keep making great music.</p>
+        </p>
       <p class="footer-muted">
         THIS DIRECTORY ORGANIZES THE WORK AND POINTS BACK TO THE CREATOR'S ORIGINAL RELEASES AND OFFICIAL SUPPORT CHANNELS.
       </p>
@@ -28,7 +36,8 @@ const { label } = Astro.props;
 
     <nav class="footer-links" aria-label="Creator and site links">
       <a class="footer-link" href={externalLinks.patreon} target="_blank" rel="noopener noreferrer">
-        <span>SUPPORT ON PATREON</span><span aria-hidden="true">↗</span>
+        <span class="patreon-link">SUPPORT ON PATREON</span>
+        <span aria-hidden="true">↗</span>
       </a>
       <a class="footer-link" href={externalLinks.instagram} target="_blank" rel="noopener noreferrer">
         <span>INSTAGRAM</span><span aria-hidden="true">↗</span>
@@ -40,7 +49,7 @@ const { label } = Astro.props;
 
   <div class="footer-bottom">
     <span>{label}</span>
-    <span class="dev-credit">DEVELOPED BY GADIEL</span>
+    <span class="dev-credit">DEVELOPED BY <a href="https://instagram.com/gadielsampaio" style="text-decoration: underline;">GADIEL</a></span>
     <span class="footer-end">INDEPENDENT CATALOG / OFFICIAL LINKS</span>
   </div>
 </footer>

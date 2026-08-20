@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import homeHero from '../assets/images/home-hero.png';
+import homeHero from '../assets/images/home.png';
 
 import { categories } from '../data/catalog';
 import { externalLinks, faqDirectoryEntry } from '../data/site';
@@ -43,18 +43,13 @@ const directoryEntries = [
 
       <div class="home-hero-content">
         <span class="home-hero-kicker">INDEPENDENT PLUGIN DIRECTORY</span>
-        <h1 id="home-title" class="home-hero-title">FREE PLUGINS.<br />ONE CLEAN<br />DIRECTORY.</h1>
-        <p class="home-hero-description">
-          Explore the work of Analog Obsession without digging through bookmarks, old posts or scattered releases.
-        </p>
+        <h1 id="home-title" class="home-hero-title">CLASSIC HARDWARE<br />ANALOG SOUND<br />IN YOUR DAW.</h1>
+        <p class="home-hero-description">Pure analog obsession. A curated space for the plugins you need, 100% free.</p>
         <a class="home-hero-button" href="#directory">
           <span>EXPLORE PLUGINS</span><span aria-hidden="true">↓</span>
         </a>
       </div>
 
-      <div class="home-hero-stamp" aria-hidden="true">
-        <img src="assets/images/ao-negative.svg" alt="" />
-      </div>
     </section>
 
     <section class="directory-index" id="directory" aria-labelledby="directory-title">
@@ -76,7 +71,7 @@ const directoryEntries = [
       ))}
     </section>
 
-    <section class="support-line" aria-label="Creator support">
+    <!-- <section class="support-line" aria-label="Creator support">
       <div class="support-line-copy">
         <span class="support-line-index">CREATOR SUPPORT // 001</span>
         <p>THE PLUG-INS ARE FREE TO USE. YOUR SUPPORT HELPS KEEP THIS INCREDIBLE WORK GOING.</p>
@@ -84,6 +79,6 @@ const directoryEntries = [
       <a href={externalLinks.patreon} target="_blank" rel="noopener noreferrer">
         <span>SUPPORT ON PATREON</span><span aria-hidden="true">↗</span>
       </a>
-    </section>
+    </section> -->
   </main>
 </BaseLayout>
