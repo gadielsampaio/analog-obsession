@@ -1,0 +1,95 @@
+[
+  {
+    "patreon_id": "135944425",
+    "title": "INDEQ",
+    "published_at": "2025-08-07T14:32:47.000+00:00",
+    "url": "https://www.patreon.com/analogobsession/posts/indeq-135944425",
+    "description": "Pure inductor based equalizer!INDEQ has no any non-linear processing on purpose. Just pure inductor based equalizer with its own unique shapes!**FEATURES**- HPF : Highpass filter @80Hz- LOW BAND : +/- 15dB @35Hz-60Hz-100Hz-220Hz with Shelf and Peak modes- MID BAND : +/- 15dB @0.2kHz-0.35kHz-0.7kHz-1.5kHz-3kHz-6kHz with High Q mode- HIGH BAND : +/- 15dB @8kHz-16kHz with Shelf and Peak modes- OUT : +/- 15dB clean output- I/O : BypassResizable interface. Simple \"Bottom Right Corner Handle\" to resize. 50% to 200%.***Resizing Tip:** When you duplicate plug-in, it will remember current state of GUI size. But if you load new instance, it will be opened at default size. To get rid of this issue, simply follow these steps;1. Open plug-in for the first time2. Resize GUI according to your screen resolution or you liking before setting any knobs3. Save this state as default preset with your DAWNow, you will be able to load new instances with same size.(If you want to go default size, simply double click to resize handle.)**Version 1.0 - 7.8.2025**- Initial Release**Available Formats**VST3 / AU / AAX Native - Audiosuite | Mac 10.11 or Higher | Intel / Apple SiliconVST3 / AAX Native - Audiosuite | Windows 10 - 11Mac Versions require a graphic card that supports “Metal”Windows Versions require a graphic card that supports “OpenGL”**DOWNLOADS**[Mac Installer](https://analogobsession.com/wp-content/uploads/2025/08/INDEQ_1.0.pkg)[Windows Installer](https://analogobsession.com/wp-content/uploads/2025/08/INDEQ_1.0.exe)[Windows Zip](https://analogobsession.com/wp-content/uploads/2025/08/INDEQ_1.0.zip)",
+    "image_urls": [],
+    "links": [
+      {
+        "text": "Mac Installer",
+        "url": "https://analogobsession.com/wp-content/uploads/2025/08/INDEQ_1.0.pkg",
+        "kind": "download"
+      },
+      {
+        "text": "Windows Installer",
+        "url": "https://analogobsession.com/wp-content/uploads/2025/08/INDEQ_1.0.exe",
+        "kind": "download"
+      },
+      {
+        "text": "Windows Zip",
+        "url": "https://analogobsession.com/wp-content/uploads/2025/08/INDEQ_1.0.zip",
+        "kind": "download"
+      }
+    ],
+    "downloads": {
+      "mac": "https://analogobsession.com/wp-content/uploads/2025/08/INDEQ_1.0.pkg",
+      "windows": "https://analogobsession.com/wp-content/uploads/2025/08/INDEQ_1.0.exe",
+      "zip": "https://analogobsession.com/wp-content/uploads/2025/08/INDEQ_1.0.zip"
+    },
+    "access_text": null
+  },
+  {
+    "patreon_id": "119632465",
+    "title": "POORTEC",
+    "published_at": "2025-01-09T11:36:42.000+00:00",
+    "url": "https://www.patreon.com/analogobsession/posts/poortec-119632465",
+    "description": "Not just another P*LT*C!Simple P*LT*C design without SRPP gain stage and inductors.It uses Fairchild style old line amp to amplify signal after passive eq.**FEATURES**- LOW FREQUENCY: Well-known P*LT*C low-end trick with extra frequencies- HIGH FREQUENCY: It's shelf-shape high boost and cut at same frequency. Hard to get original bell-shape but not impossible!- TP: It's trimpot on gain stage circuit and it will add extra drive to your signal. Actually, it's not controllable from outside cause it's set and forget component. But after calibrating desired gain boost (20dB) to set unit at unity level, you can still use TP to drive gain stage hotter. It will give you unique sound with enhanced transients!- OUTPUT: Clean master output- BYPASS: Big red button*---****NO OVERSAMPLING--***-Resizable interface. Simple \"Bottom Right Corner Handle\" to resize. 50% to 200%.***Resizing Tip:** When you duplicate plug-in, it will remember current state of GUI size. But if you load new instance, it will be opened at default size. To get rid of this issue, simply follow these steps;1. Open plug-in for the first time2. Resize GUI according to your screen resolution or you liking before setting any knobs3. Save this state as default preset with your DAWNow, you will be able to load new instances with same size.(If you want to go default size, simply double click to resize handle.)**Version 1.0 - 9.1.2025****Available Formats**VST3 / AU / AAX Native - Audiosuite | Mac 10.11 or Higher | Intel / Apple SiliconVST3 / AAX Native - Audiosuite | Windows 10 - 11Mac Versions require a graphic card that supports “Metal”Windows Versions require a graphic card that supports “OpenGL”**DOWNLOADS**[Mac Installer](https://analogobsession.com/wp-content/uploads/2025/01/POORTEC_1.0.pkg)[Windows Installer](https://analogobsession.com/wp-content/uploads/2025/01/POORTEC_1.0.exe)[Windows Zip](https://analogobsession.com/wp-content/uploads/2025/01/POORTEC_1.0.zip)",
+    "image_urls": [],
+    "links": [
+      {
+        "text": "Mac Installer",
+        "url": "https://analogobsession.com/wp-content/uploads/2025/01/POORTEC_1.0.pkg",
+        "kind": "download"
+      },
+      {
+        "text": "Windows Installer",
+        "url": "https://analogobsession.com/wp-content/uploads/2025/01/POORTEC_1.0.exe",
+        "kind": "download"
+      },
+      {
+        "text": "Windows Zip",
+        "url": "https://analogobsession.com/wp-content/uploads/2025/01/POORTEC_1.0.zip",
+        "kind": "download"
+      }
+    ],
+    "downloads": {
+      "mac": "https://analogobsession.com/wp-content/uploads/2025/01/POORTEC_1.0.pkg",
+      "windows": "https://analogobsession.com/wp-content/uploads/2025/01/POORTEC_1.0.exe",
+      "zip": "https://analogobsession.com/wp-content/uploads/2025/01/POORTEC_1.0.zip"
+    },
+    "access_text": null
+  },
+  {
+    "patreon_id": "63538579",
+    "title": "TILTA",
+    "published_at": "2022-03-08T16:26:10.000+00:00",
+    "url": "https://www.patreon.com/analogobsession/posts/tilta-63538579",
+    "description": "Easy to use Tilt Equalizer! No need any other words!**FEATURES**- CENTER: Center frequency between 50Hz and 7kHz- GAIN: +/- 10dB tilt equalizer gain- LO CUT & HI CUT: Will let you control unwanted lows and highsResizable interface. Simple \"Bottom Right Corner Handle\" to resize. 50% to 200%.***Resizing Tip:** When you duplicate plug-in, it will remember current state of GUI size. But if you load new instance, it will be opened at default size. To get rid of this issue, simply follow these steps;1. Open plug-in for the first time2. Resize GUI according to your screen resolution or you liking before setting any knobs3. Save this state as default preset with your DAWNow, you will be able to load new instances with same size.(If you want to go default size, simply double click to resize handle.)**Version 1.0 - 7.11.2023****Available Formats**VST3 / AU / AAX Native - Audiosuite | Mac 10.11 or Higher | Intel / Apple SiliconVST3 / AAX Native - Audiosuite | Windows 10 - 11Mac Versions require a graphic card that supports “Metal”Windows Versions require a graphic card that supports “OpenGL”**DOWNLOADS**[Mac Installer](https://analogobsession.com/wp-content/uploads/2023/12/TILTA_2.0.pkg) [Windows Installer](https://analogobsession.com/wp-content/uploads/2023/12/TILTA_2.0.exe) [Windows Zip](https://analogobsession.com/wp-content/uploads/2023/12/TILTA_2.0.zip)",
+    "image_urls": [],
+    "links": [
+      {
+        "text": "Mac Installer",
+        "url": "https://analogobsession.com/wp-content/uploads/2023/12/TILTA_2.0.pkg",
+        "kind": "download"
+      },
+      {
+        "text": "Windows Installer",
+        "url": "https://analogobsession.com/wp-content/uploads/2023/12/TILTA_2.0.exe",
+        "kind": "download"
+      },
+      {
+        "text": "Windows Zip",
+        "url": "https://analogobsession.com/wp-content/uploads/2023/12/TILTA_2.0.zip",
+        "kind": "download"
+      }
+    ],
+    "downloads": {
+      "mac": "https://analogobsession.com/wp-content/uploads/2023/12/TILTA_2.0.pkg",
+      "windows": "https://analogobsession.com/wp-content/uploads/2023/12/TILTA_2.0.exe",
+      "zip": "https://analogobsession.com/wp-content/uploads/2023/12/TILTA_2.0.zip"
+    },
+    "access_text": null
+  }
+]

@@ -1,6 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import type { Plugin } from '../data/catalog';
+import posts from '../data/posts.json'
+import { undefined } from 'astro:schema';
 
 interface Props {
   plugin: Plugin;
@@ -11,6 +13,17 @@ const {
   plugin,
   priority = false,
 } = Astro.props;
+
+const hasPluginPage = posts.some(
+  (post) =>
+  post.title.toLowerCase() === plugin.name.toLowerCase()
+);
+
+const prefix = `${plugin.category}-`;
+
+const slug = plugin.id.startsWith(prefix) ? plugin.id.slice(prefix.length) : plugin.id;
+
+const href = hasPluginPage ? `/plugins/${slug}` : plugin.url;
 ---
 
 <article class="unit-sheet" id={plugin.id}>
@@ -58,10 +71,10 @@ const {
     </div>
 
     <a
-      href={plugin.url}
+      href={href}
       class="btn-physical"
-      target="_blank"
-      rel="noopener noreferrer"
+      target={hasPluginPage ? null : '_blank'}
+      rel={hasPluginPage ? null : 'noopener noreferrer'}
     >
       <span>VIEW UNIT →</span>
       <span class="status" aria-hidden="true"></span>

@@ -1,6 +1,6 @@
 ---
 import { categories, type CategorySlug } from '../data/catalog';
-import type { PageId } from '../data/site';
+import { sitePath, type PageId } from '../data/site';
 import { Image } from 'astro:assets';
 import brandMark from '../assets/images/AO-log.svg';
 
@@ -12,18 +12,32 @@ interface Props {
 const { activePage, signal = '' } = Astro.props;
 
 const navLinks = [
-  { id: 'home' as const, href: 'index.html#directory', label: 'DIRECTORY' },
+  {
+    id: 'home' as const,
+    href: sitePath('index.html#directory'),
+    label: 'DIRECTORY'
+  },
+
   ...categories.map((category) => ({
     id: category.slug as CategorySlug,
-    href: `${category.slug}.html`,
+    href: sitePath(`${category.slug}.html`),
     label: category.homeLabel,
   })),
-  { id: 'faq' as const, href: 'faq.html', label: 'FAQ' },
+
+  {
+    id: 'faq' as const,
+    href: sitePath('faq.html'),
+    label: 'FAQ'
+  },
 ];
 ---
 
 <header class="sys-header">
-  <a class="brand-logo" href="index.html" aria-label="Analog Obsession directory home">
+  <a
+    class="brand-logo"
+    href={sitePath('index.html')}
+    aria-label="Analog Obsession directory home"
+  >
     <Image src={brandMark} class="brand-mark" alt="Logo Analog Obsession"/>
     <span>ANALOG OBSESSION</span>
   </a>

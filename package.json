@@ -6,13 +6,16 @@
   "engines": {
     "node": ">=22.12.0"
   },
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
+"scripts": {
+  "dev": "astro dev --base /",
+  "build": "astro build --base /",
+  "preview": "astro preview --base /",
+  "build:pages": "astro build --site https://gadielsampaio.github.io --base /analog-obsession",
+  "preview:pages": "astro preview --site https://gadielsampaio.github.io --base /analog-obsession",
+  "astro": "astro"
+},
   "dependencies": {
-    "astro": "7.2.2"
+    "astro": "7.2.2",
+    "marked": "^18.0.10"
   }
 }

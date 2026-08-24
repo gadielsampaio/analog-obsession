@@ -1,0 +1,1050 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { plugins, categories } from '../../data/catalog';
+import posts from '../../data/posts.json';
+import { marked } from 'marked';
+import { sitePath } from '../../data/site';
+
+export function getStaticPaths() {
+  return posts
+    .map((post) => {
+      const plugin = plugins.find(
+        (plugin) =>
+          plugin.name.toLowerCase() === post.title.toLowerCase()
+      );
+
+      if (!plugin) {
+        return null;
+      }
+
+      const prefix = `${plugin.category}-`;
+
+      const slug = plugin.id.startsWith(prefix)
+        ? plugin.id.slice(prefix.length)
+        : plugin.id;
+
+      return {
+        params: {
+          slug,
+        },
+
+        props: {
+          plugin,
+          post,
+        },
+      };
+    })
+    .filter(Boolean);
+}
+
+const { plugin, post } = Astro.props;
+
+const category = categories.find(
+  (category) => category.slug === plugin.category
+);
+
+if (!category) {
+  throw new Error(`Categoria não encontrada: ${plugin.category}`);
+}
+
+const descriptionHtml = await marked.parse(post.description);
+---
+
+<BaseLayout
+  title={`${plugin.name} — Analog Obsession`}
+  description={plugin.description}
+  activePage={plugin.category}
+  signal={category.signal}
+  footerLabel={`PLUGIN // ${plugin.name.toUpperCase()}`}
+>
+  <main class="plugin-page">
+
+    <!-- =====================================================
+         VOLTAR
+         ===================================================== -->
+
+    <div class="top-navigation">
+      <a
+        class="back"
+        href={sitePath(`${plugin.category}.html`)}
+      >
+        ← BACK TO {category.navLabel}
+      </a>
+
+      <span class="top-code">
+        AO / {plugin.category.toUpperCase()} / {plugin.number}
+      </span>
+    </div>
+
+
+    <!-- =====================================================
+         TÍTULO
+         ===================================================== -->
+
+    <header class="plugin-header">
+
+      <div class="plugin-number">
+        UNIT {plugin.number} / {plugin.tag}
+      </div>
+
+      <h1>{plugin.name}</h1>
+
+    </header>
+
+
+    <!-- =====================================================
+         OVERVIEW
+         imagem esquerda + informações direita
+         ===================================================== -->
+
+    <section class="plugin-overview">
+
+      <div class="plugin-image">
+
+        <div class="image-label">
+          PRODUCT / {plugin.name.toUpperCase()}
+        </div>
+
+        <div class="image-frame">
+          <img
+            src={plugin.image}
+            alt={plugin.imageAlt}
+          />
+        </div>
+
+        <div class="image-footer">
+          <span>ANALOG OBSESSION</span>
+          <span>{plugin.tag}</span>
+        </div>
+
+      </div>
+
+
+      <div class="plugin-info">
+
+        <div class="info-index">
+          {plugin.number}
+        </div>
+
+        <div class="info-description">
+          <span class="micro-label">
+            OVERVIEW
+          </span>
+
+          <p>
+            {plugin.description}
+          </p>
+        </div>
+
+
+        <section class="specs">
+
+          {plugin.specs.map((spec) => (
+            <div class="spec">
+
+              <span class="spec-label">
+                {spec.label}
+              </span>
+
+              <strong class="spec-value">
+                {spec.value}
+              </strong>
+
+            </div>
+          ))}
+
+        </section>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ABOUT
+         3 colunas
+         ===================================================== -->
+
+    <section class="content-section">
+
+      <aside class="content-sidebar">
+
+        <span class="section-number">
+          01
+        </span>
+
+        <span class="section-label">
+          ABOUT
+        </span>
+
+      </aside>
+
+
+      <div
+        class="post-content"
+        set:html={descriptionHtml}
+      />
+
+
+      <aside class="content-meta">
+
+        <div class="meta-block">
+          <span class="micro-label">
+            CATEGORY
+          </span>
+
+          <strong>
+            {category.navLabel}
+          </strong>
+        </div>
+
+        <div class="meta-block">
+          <span class="micro-label">
+            UNIT
+          </span>
+
+          <strong>
+            {plugin.number}
+          </strong>
+        </div>
+
+        <div class="meta-block">
+          <span class="micro-label">
+            TYPE
+          </span>
+
+          <strong>
+            {plugin.tag}
+          </strong>
+        </div>
+
+      </aside>
+
+    </section>
+
+
+    <!-- =====================================================
+         DOWNLOADS
+         ===================================================== -->
+
+    <section class="downloads-section">
+
+      <aside class="downloads-sidebar">
+
+        <span class="section-number">
+          02
+        </span>
+
+        <span class="section-label">
+          DOWNLOADS
+        </span>
+
+      </aside>
+
+
+      <div class="download-intro">
+
+        <span class="micro-label">
+          AVAILABLE FILES
+        </span>
+
+        <h2>
+          GET THE<br />
+          PLUGIN
+        </h2>
+
+      </div>
+
+
+      <div class="download-list">
+
+        {post.downloads.mac && (
+          <a
+            href={post.downloads.mac}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>
+              MAC
+            </span>
+
+            <strong>
+              INSTALLER
+            </strong>
+
+            <span class="download-arrow">
+              ↗
+            </span>
+          </a>
+        )}
+
+
+        {post.downloads.windows && (
+          <a
+            href={post.downloads.windows}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>
+              WINDOWS
+            </span>
+
+            <strong>
+              INSTALLER
+            </strong>
+
+            <span class="download-arrow">
+              ↗
+            </span>
+          </a>
+        )}
+
+
+        {post.downloads.zip && (
+          <a
+            href={post.downloads.zip}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>
+              WINDOWS
+            </span>
+
+            <strong>
+              ZIP
+            </strong>
+
+            <span class="download-arrow">
+              ↗
+            </span>
+          </a>
+        )}
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SOURCE
+         ===================================================== -->
+
+    <footer class="source">
+
+      <span>
+        SOURCE / ORIGINAL RELEASE
+      </span>
+
+      <a
+        href={post.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ORIGINAL PATREON POST ↗
+      </a>
+
+    </footer>
+
+  </main>
+</BaseLayout>
+
+
+<style>
+
+  /* =========================================================
+     PÁGINA
+     ========================================================= */
+
+  .plugin-page {
+    width: min(1500px, 94vw);
+    margin: 0 auto;
+    padding: 2rem 0 8rem;
+  }
+
+
+  /* =========================================================
+     NAVEGAÇÃO SUPERIOR
+     ========================================================= */
+
+  .top-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 1rem;
+
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+
+    transition:
+      color var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .back:hover {
+    color: var(--tech-red);
+    transform: translateX(-4px);
+  }
+
+  .top-code {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+
+    color: var(--aluminum);
+  }
+
+
+  /* =========================================================
+     HEADER
+     ========================================================= */
+
+  .plugin-header {
+    position: relative;
+
+    padding:
+      clamp(3rem, 6vw, 7rem)
+      0
+      clamp(2rem, 4vw, 4rem);
+
+    border-bottom: 1px solid var(--charcoal);
+  }
+
+  .plugin-number {
+    margin-bottom: 0.8rem;
+
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+
+    color: var(--tech-red);
+  }
+
+  h1 {
+    margin: 0;
+
+    font-size: clamp(5rem, 16vw, 15rem);
+    font-weight: 700;
+    line-height: 0.72;
+    letter-spacing: -0.055em;
+
+    text-transform: uppercase;
+  }
+
+
+  /* =========================================================
+     OVERVIEW
+     12 colunas
+     ========================================================= */
+
+  .plugin-overview {
+    display: grid;
+
+    grid-template-columns:
+      repeat(12, minmax(0, 1fr));
+
+    border-bottom: 1px solid var(--charcoal);
+  }
+
+
+  /* =========================================================
+     IMAGEM
+     ========================================================= */
+
+  .plugin-image {
+    grid-column: 1 / 8;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    border-right: 1px solid var(--charcoal);
+  }
+
+  .image-label {
+    padding: 0.8rem 1rem;
+
+    border-bottom: 1px solid var(--border-color);
+
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+
+    color: var(--aluminum);
+  }
+
+  .image-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 1;
+
+    min-height: 500px;
+
+    padding:
+      clamp(2.5rem, 7vw, 7rem)
+      clamp(1.5rem, 5vw, 5rem);
+  }
+
+  .image-frame img {
+    display: block;
+
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+
+    object-fit: contain;
+  }
+
+  .image-footer {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 0.8rem 1rem;
+
+    border-top: 1px solid var(--border-color);
+
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+
+    color: var(--aluminum);
+  }
+
+
+  /* =========================================================
+     INFO DIREITA
+     ========================================================= */
+
+  .plugin-info {
+    grid-column: 8 / -1;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+  }
+
+  .info-index {
+    padding: 0.8rem 1.5rem;
+
+    border-bottom: 1px solid var(--border-color);
+
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    text-align: right;
+
+    color: var(--aluminum);
+  }
+
+  .info-description {
+    flex: 1;
+
+    padding:
+      clamp(2rem, 4vw, 4rem)
+      clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .micro-label {
+    display: block;
+
+    margin-bottom: 1.2rem;
+
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+
+    color: var(--aluminum);
+  }
+
+  .info-description p {
+    max-width: 520px;
+
+    font-size: clamp(1.05rem, 1.45vw, 1.3rem);
+    line-height: 1.55;
+  }
+
+
+  /* =========================================================
+     SPECS
+     ========================================================= */
+
+  .specs {
+    margin-top: auto;
+
+    border-top: 1px solid var(--charcoal);
+  }
+
+  .spec {
+    display: grid;
+
+    grid-template-columns:
+      minmax(90px, 0.7fr)
+      minmax(0, 1.5fr);
+
+    gap: 1rem;
+
+    padding: 1rem 1.5rem;
+
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .spec:last-child {
+    border-bottom: 0;
+  }
+
+  .spec-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+
+    color: var(--aluminum);
+  }
+
+  .spec-value {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+
+    text-align: right;
+  }
+
+
+  /* =========================================================
+     ABOUT
+     3 colunas
+     ========================================================= */
+
+  .content-section {
+    display: grid;
+
+    grid-template-columns:
+      repeat(12, minmax(0, 1fr));
+
+    padding: clamp(4rem, 8vw, 8rem) 0;
+
+    border-bottom: 1px solid var(--charcoal);
+  }
+
+  .content-sidebar {
+    grid-column: 1 / 3;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    padding-right: 2rem;
+  }
+
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+
+    color: var(--tech-red);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .post-content {
+    grid-column: 3 / 10;
+
+    max-width: 760px;
+
+    padding-right: clamp(2rem, 4vw, 5rem);
+
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .content-meta {
+    grid-column: 10 / -1;
+
+    border-left: 1px solid var(--border-color);
+
+    padding-left: 2rem;
+  }
+
+  .meta-block {
+    padding: 0 0 1.5rem;
+    margin-bottom: 1.5rem;
+
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .meta-block strong {
+    display: block;
+
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+  }
+
+
+  /* Markdown vindo do post */
+
+  :global(.post-content p) {
+    margin-bottom: 1.5rem;
+  }
+
+  :global(.post-content h1),
+  :global(.post-content h2),
+  :global(.post-content h3) {
+    margin:
+      3rem
+      0
+      1rem;
+  }
+
+  :global(.post-content h2) {
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 0.9;
+  }
+
+  :global(.post-content ul) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+
+    list-style: disc;
+  }
+
+  :global(.post-content ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  :global(.post-content li) {
+    margin-bottom: 0.6rem;
+  }
+
+  :global(.post-content a) {
+    text-decoration: underline;
+
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+
+  /* =========================================================
+     DOWNLOADS
+     ========================================================= */
+
+  .downloads-section {
+    display: grid;
+
+    grid-template-columns:
+      repeat(12, minmax(0, 1fr));
+
+    padding: clamp(4rem, 8vw, 8rem) 0;
+
+    border-bottom: 1px solid var(--charcoal);
+  }
+
+  .downloads-sidebar {
+    grid-column: 1 / 3;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    padding-right: 2rem;
+  }
+
+  .download-intro {
+    grid-column: 3 / 7;
+
+    padding-right: clamp(2rem, 4vw, 4rem);
+  }
+
+  .download-intro h2 {
+    font-size: clamp(3rem, 6vw, 7rem);
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+  }
+
+  .download-list {
+    grid-column: 7 / -1;
+
+    border-top: 1px solid var(--charcoal);
+  }
+
+  .download-list a {
+    display: grid;
+
+    grid-template-columns:
+      minmax(90px, 0.8fr)
+      1.5fr
+      auto;
+
+    align-items: center;
+
+    gap: 1rem;
+
+    min-height: 80px;
+
+    padding: 1rem 1.2rem;
+
+    border-bottom: 1px solid var(--charcoal);
+
+    font-family: var(--font-mono);
+
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast),
+      padding var(--transition-fast);
+  }
+
+  .download-list a:hover {
+    padding-left: 1.6rem;
+
+    background: var(--charcoal);
+    color: var(--off-white);
+  }
+
+  .download-list a > span:first-child {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+
+    color: var(--aluminum);
+  }
+
+  .download-list a strong {
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+
+  .download-arrow {
+    font-size: 1.2rem;
+  }
+
+
+  /* =========================================================
+     SOURCE
+     ========================================================= */
+
+  .source {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 2rem;
+
+    padding: 1.5rem 0;
+
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+  }
+
+  .source > span {
+    color: var(--aluminum);
+  }
+
+  .source a {
+    font-weight: 700;
+  }
+
+  .source a:hover {
+    color: var(--tech-red);
+  }
+
+
+  /* =========================================================
+     TABLET
+     ========================================================= */
+
+  @media (max-width: 1000px) {
+
+    .plugin-image {
+      grid-column: 1 / 7;
+    }
+
+    .plugin-info {
+      grid-column: 7 / -1;
+    }
+
+    .image-frame {
+      min-height: 400px;
+    }
+
+    .content-sidebar {
+      grid-column: 1 / 3;
+    }
+
+    .post-content {
+      grid-column: 3 / 9;
+    }
+
+    .content-meta {
+      grid-column: 9 / -1;
+    }
+
+    .downloads-sidebar {
+      grid-column: 1 / 3;
+    }
+
+    .download-intro {
+      grid-column: 3 / 7;
+    }
+
+    .download-list {
+      grid-column: 7 / -1;
+    }
+  }
+
+
+  /* =========================================================
+     MOBILE
+     ========================================================= */
+
+  @media (max-width: 760px) {
+
+    .plugin-page {
+      width: min(92vw, 1500px);
+    }
+
+
+    /* topo */
+
+    .top-code {
+      display: none;
+    }
+
+
+    /* título */
+
+    .plugin-header {
+      padding:
+        3rem
+        0
+        2rem;
+    }
+
+    h1 {
+      font-size: clamp(4.5rem, 25vw, 8rem);
+    }
+
+
+    /* overview vira uma coluna */
+
+    .plugin-overview {
+      grid-template-columns: 1fr;
+    }
+
+    .plugin-image,
+    .plugin-info {
+      grid-column: 1;
+    }
+
+    .plugin-image {
+      border-right: 0;
+      border-bottom: 1px solid var(--charcoal);
+    }
+
+    .image-frame {
+      min-height: auto;
+
+      padding: 4rem 1.5rem;
+    }
+
+    .info-description {
+      padding: 2.5rem 0;
+    }
+
+    .info-index {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .spec {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+
+    /* about */
+
+    .content-section {
+      grid-template-columns: 1fr;
+
+      padding: 4rem 0;
+    }
+
+    .content-sidebar,
+    .post-content,
+    .content-meta {
+      grid-column: 1;
+    }
+
+    .content-sidebar {
+      margin-bottom: 3rem;
+    }
+
+    .post-content {
+      padding-right: 0;
+    }
+
+    .content-meta {
+      margin-top: 3rem;
+
+      padding:
+        2rem
+        0
+        0;
+
+      border-top: 1px solid var(--border-color);
+      border-left: 0;
+    }
+
+
+    /* downloads */
+
+    .downloads-section {
+      grid-template-columns: 1fr;
+
+      padding: 4rem 0;
+    }
+
+    .downloads-sidebar,
+    .download-intro,
+    .download-list {
+      grid-column: 1;
+    }
+
+    .downloads-sidebar {
+      margin-bottom: 3rem;
+    }
+
+    .download-intro {
+      margin-bottom: 3rem;
+      padding-right: 0;
+    }
+
+
+    /* source */
+
+    .source {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+  }
+
+</style>
