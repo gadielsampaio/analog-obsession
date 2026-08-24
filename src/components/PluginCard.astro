@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import type { Plugin } from '../data/catalog';
 import posts from '../data/posts.json'
-import { undefined } from 'astro:schema';
+import { sitePath } from '../data/site';
 
 interface Props {
   plugin: Plugin;
@@ -23,7 +23,9 @@ const prefix = `${plugin.category}-`;
 
 const slug = plugin.id.startsWith(prefix) ? plugin.id.slice(prefix.length) : plugin.id;
 
-const href = hasPluginPage ? `/plugins/${slug}` : plugin.url;
+const href = hasPluginPage
+  ? sitePath(`plugins/${slug}.html`)
+  : plugin.url;
 ---
 
 <article class="unit-sheet" id={plugin.id}>
