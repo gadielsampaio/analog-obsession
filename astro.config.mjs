@@ -12,4 +12,8 @@ export default defineConfig({
     format: 'file',
     inlineStylesheets: 'never',
   },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
 });

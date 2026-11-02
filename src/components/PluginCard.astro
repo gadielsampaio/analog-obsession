@@ -23,24 +23,39 @@ const prefix = `${plugin.category}-`;
 
 const slug = plugin.id.startsWith(prefix) ? plugin.id.slice(prefix.length) : plugin.id;
 
-const href = hasPluginPage
-  ? sitePath(`plugins/${slug}.html`)
-  : plugin.url;
+// const href = hasPluginPage
+//   ? sitePath(`plugins/${slug}.html`)
+//   : plugin.url;
+const href = plugin.url;
 ---
 
 <article class="unit-sheet" id={plugin.id}>
-  <div class="unit-visual">
+  <!-- <div class="unit-visual">
     <Image
-      src={plugin.image}
-      alt={plugin.imageAlt}
-      inferSize
-      width={800}
-      layout="constrained"
-      quality={80}
-      format="webp"
-      priority={priority}
-    />
-  </div>
+  src={plugin.image}
+src={plugin.image}
+  alt={plugin.imageAlt}
+  width={1024}
+  height={576}
+  loading={priority ? 'eager' : 'lazy'}
+  fetchpriority={priority ? 'high' : 'auto'}
+/>
+  </div> -->
+  <div class="unit-visual">
+  <div class="image-skeleton"></div>
+
+  <img
+    src={plugin.image}
+    alt={plugin.imageAlt}
+    width="1024"
+    height="576"
+    loading={priority ? 'eager' : 'lazy'}
+    decoding="async"
+    class="plugin-image"
+    onload="this.classList.add('loaded'); this.previousElementSibling?.remove()"
+    onerror="this.previousElementSibling?.remove()"
+  />
+</div>
 
   <div class="unit-data">
     <div>
@@ -72,12 +87,18 @@ const href = hasPluginPage
       </div>
     </div>
 
-    <a
+    <!-- <a
       href={href}
       class="btn-physical"
       target={hasPluginPage ? null : '_blank'}
       rel={hasPluginPage ? null : 'noopener noreferrer'}
-    >
+    > -->
+      <a
+  href={href}
+  class="btn-physical"
+  target="_blank"
+  rel="noopener noreferrer"
+>
       <span>VIEW UNIT →</span>
       <span class="status" aria-hidden="true"></span>
     </a>
