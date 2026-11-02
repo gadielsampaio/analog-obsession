@@ -764,3 +764,17 @@ ul {
   from { background-position: 200% 0; }
   to { background-position: -200% 0; }
 }
+
+@media (max-width: 1280px) {
+  .sys-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .mobile-toggle {
+    justify-self: end;
+  }
+
+  .desktop-signal {
+    display: none;
+  }
+}

@@ -53,7 +53,7 @@ src={plugin.image}
     decoding="async"
     class="plugin-image"
     onload="this.classList.add('loaded'); this.previousElementSibling?.remove()"
-    onerror="this.previousElementSibling?.remove()"
+    onerror="this.previousElementSibling?.remove(); this.style.opacity = '1'; this.alt = 'Image unavailable';"
   />
 </div>
 
